@@ -2,7 +2,7 @@
 require RiggingToolbox;
 
 operator entry(){
-   
+
     Xfo a, b;
     a.tr = Vec3(-5, 5, 0);
     b.tr = Vec3(5, -5, 0);
@@ -10,8 +10,8 @@ operator entry(){
     // construct the curve
     BezierXfo curve;
     curve.tangentLength = 3.0;
-    curve.push(a);
-    curve.push(b);
+    curve.pushKnot(a);
+    curve.pushKnot(b);
 
     // project a transform in the middle
     Xfo center = curve.project(0.5);

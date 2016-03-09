@@ -58,7 +58,7 @@ inline BezierXfo.pushKnot!(Xfo knot) {
   this.knots.push(knot);
 }
 
-// Sets all Xfos used to drive the curve. 
+// Sets all Xfos used to drive the curve.
 inline BezierXfo.setKnots!(Xfo knots[]) {
   this.knots = knots;
 }
@@ -128,7 +128,7 @@ inline Xfo BezierXfo.project(Scalar ratio) {
     Vec3 cd = c.linearInterpolate(d, u);
     Vec3 abbc = ab.linearInterpolate(bc, u);
     Vec3 bccd = bc.linearInterpolate(cd, u);
-    
+
     result.tr = abbc.linearInterpolate(bccd, u);
   }
   result.sc = this.knots[segment].sc.linearInterpolate(this.knots[segment+1].sc, u);
@@ -197,7 +197,7 @@ inline Xfo[] BezierXfo.projectArray(Size count, Scalar start, Scalar end) {
     offset += step;
     if(resultIndex == result.size()-1)
       break;
-  } 
+  }
 
   if(this.alignOnTangent) {
     for(Size i=0;i<result.size();i++) {
@@ -230,7 +230,7 @@ inline Xfo[] BezierXfo.projectArray(Size count) {
 function Xfo[] BezierXfo.projects(Scalar ratios[], Size samples, Scalar maxLength) {
   Xfo result[];
   Size count = ratios.size();
-  
+
   if(count == 0)
     return result;
   if(this.knots.size() <= 1)
@@ -249,7 +249,7 @@ function Xfo[] BezierXfo.projects(Scalar ratios[], Size samples, Scalar maxLengt
     Vec3 v = xfos[i].tr - xfos[i-1].tr;
     lengths[i] = lengths[i-1] + v.length();
   }
-  
+
   result[0] = this.knots[0];
   Size knotOffset = 0;
 
@@ -282,7 +282,7 @@ function Xfo[] BezierXfo.projects(Scalar ratios[], Size samples, Scalar maxLengt
 // generates a regularly placed new knot array
 function Xfo[] BezierXfo.projectRegularly(Size count, Size samples, Scalar maxLength) {
   Xfo result[];
-  
+
   if(count == 0)
     return result;
 
