@@ -1,0 +1,72 @@
+loadReferenceFromAlembic:D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources\skinnedTube.abc
+Importing:D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources\skinnedTube.abc
+DeltaMushMask.connect:0
+function DeltaMushModifier.loadReferenceFromAlembic!(FilePath)
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryCache.update!(io GeometrySet, GeometryOperator)
+--function AlembicSkinnedMeshGeometryGenerator.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Update:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function WeightmapModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions","normals"]
+----Update:positions
+----Update:normals
+--function DeltaMushModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function ComputeNormalsModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function ComputeTangentsModifier.evaluate!(EvalContext, io GeometrySet)
+function GeometryStack.notify!(Notifier, String, String):SkinningModifier.changed
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Restore:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function WeightmapModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions","normals"]
+----Update:positions
+----Restore:normals
+--function DeltaMushModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function ComputeNormalsModifier.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function ComputeTangentsModifier.evaluate!(EvalContext, io GeometrySet)
+
+stack:GeometryStack {
+  geomOperators:[
+    {
+      type: AlembicSkinnedMeshGeometryGenerator,
+      filePath: skinnedTube.abc
+      expandedPath: D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources\skinnedTube.abc
+    }
+    {
+      type: SkinningModifier
+    }
+    {
+      type: WeightmapModifier
+    }
+    {
+      type: DeltaMushModifier
+    }
+    {
+      type: ComputeNormalsModifier
+    }
+    {
+      type: ComputeTangentsModifier
+    }
+  ],
+  geomSet:   {
+    geometries:[
+      pCylinderShape1:{
+      },
+    ]
+    attributeGenerations:{
+      positions:3,
+      DeltaMushMask:2,
+      normals:2,
+      tangents:2,
+    },
+  }
+}

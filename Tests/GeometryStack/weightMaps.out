@@ -1,6 +1,9 @@
+weightMap.connect:0
 function GeometrySet GeometryStack.evaluate!(EvalContext)
 --function GeometryCache.update!(io GeometrySet, GeometryOperator)
 --function PolygonMeshSphereGenerator.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):[]
+--function WeightmapModifier.evaluate!(EvalContext, io GeometrySet)
 --function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
 ----Update:positions
 --function PushModifier.evaluate!(EvalContext, io GeometrySet)
@@ -16,6 +19,9 @@ GeometryStack {
       type: PolygonMeshSphereGenerator
     }
     {
+      type: WeightmapModifier
+    }
+    {
       type: PushModifier
     }
   ],
@@ -28,6 +34,7 @@ GeometryStack {
       positions:2,
       normals:1,
       uvs0:1,
+      weightMap:1,
     },
   }
 }

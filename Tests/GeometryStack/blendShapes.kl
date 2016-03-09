@@ -5,9 +5,7 @@ operator entry(){
 
   StartFabricProfiling();
 
-
-  FilePath basePath("${FABRIC_RIGGINGTOOLBOX_PATH}/Tests/GeometryStack/Resources/");
-  basePath = basePath.expandEnvVars();
+  FilePath basePath = FilePath("${FABRIC_RIGGINGTOOLBOX_PATH}/Tests/GeometryStack/Resources/").expandEnvVars();
 
   String json = "    {\n\
     \"geomOperators\": [
@@ -36,7 +34,7 @@ operator entry(){
   EvalContext context();
   stack.evaluate(context);
 
-  // Modify the blend params and then reevaluate. 
+  // Modify the blend params and then reevaluate.
   Scalar weights[];
   weights.resize(2);
   weights[0] = 0.65;
@@ -50,6 +48,6 @@ operator entry(){
   report( GetEvalPathReport() );
 
   report("stack:" + stack.getDesc());
-  
+
 }
 

@@ -1,27 +1,34 @@
-Importing:C:\Users\Phil\Projects\RiggingToolbox/Tests/GeometryStack/Resources/skinnedTube.abc
-AlembicGeometryAttributesReader: Property "EnvelopeWeights" not supported.
-AlembicGeometryAttributesReader: Property "MappingIndices" not supported.
-AlembicGeometryAttributesReader: Property "EnvelopeDeformerIndices" not supported.
-AlembicGeometryAttributesReader: Property "EnvelopeDeformers" not supported.
-Warning: Pose count does not match the reference pose count. referencePose:4 != pose:0. Skinning disabled
-function GeometrySet Ref<GeometryStack>.evaluate!(EvalContext)
---function Ref<AlembicGeometryGenerator>#evaluate?(EvalContext, io GeometrySet)
---function Ref<GeometryCache>#update!(GeometrySet, String[])
---function Ref<SkinningModifier>#evaluate?(EvalContext, io GeometrySet)
-function Ref<GeometryStack>#notify!(Notifier, String, String):changed
-function GeometrySet Ref<GeometryStack>.evaluate!(EvalContext)
---function Ref<GeometryCache>#restore?(io GeometrySet)
---function Ref<SkinningModifier>#evaluate?(EvalContext, io GeometrySet)
+Importing:D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources/skinnedTube.abc
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryCache.update!(io GeometrySet, GeometryOperator)
+--function AlembicSkinnedMeshGeometryGenerator.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Update:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
+function GeometryStack.notify!(Notifier, String, String):SkinningModifier.changed
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Restore:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
 
-stack:GeometryStack { 
-  geomOperators:[ 
-  {
-    type: AlembicGeometryGenerator,
-    filePath: ${FABRIC_RIGGINGTOOLBOX_PATH}/Tests/GeometryStack/Resources/skinnedTube.abc
-  }
-  { 
-    type: SkinningModifier
-  }
+stack:GeometryStack {
+  geomOperators:[
+    {
+      type: AlembicSkinnedMeshGeometryGenerator,
+      filePath: ${FABRIC_RIGGINGTOOLBOX_PATH}/Tests/GeometryStack/Resources/skinnedTube.abc
+      expandedPath: D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources/skinnedTube.abc
+    }
+    {
+      type: SkinningModifier
+    }
   ],
-  numGeometries:1
+  geomSet:   {
+    geometries:[
+      pCylinderShape1:{
+      },
+    ]
+    attributeGenerations:{
+      positions:2,
+    },
+  }
 }

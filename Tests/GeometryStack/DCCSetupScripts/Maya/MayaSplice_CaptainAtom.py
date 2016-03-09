@@ -2,6 +2,11 @@
 import json
 from maya import cmds
 
+import os
+if 'FABRIC_RIGGINGTOOLBOX_PATH' not in os.environ:
+  raise Exception("Please set the rigging ")
+toolboxPath = os.environ['FABRIC_RIGGINGTOOLBOX_PATH']
+
 # cmds.file(new=True,f=True)
 # cmds.file("D:/Resources/captainatom_project/scenes/captainatom_v1_geomStripped.mb", r=True);
 
@@ -14,7 +19,7 @@ influenceGeoms_InitNode = cmds.createNode("spliceMayaNode", name = "captainAtom_
 cmds.fabricSplice('addInputPort', influenceGeoms_InitNode, json.dumps({'portName':'filePath', 'dataType':'String', 'addMayaAttr': True}))
 cmds.fabricSplice('addOutputPort', influenceGeoms_InitNode, json.dumps({'portName':'stack', 'dataType':'GeometryStack', 'extension':'RiggingToolbox', 'addSpliceMayaAttr':True, 'autoInitObjects': True}))
 
-cmds.setAttr(influenceGeoms_InitNode + '.filePath', "D:/Projects/RiggingToolbox/Tests/GeometryStack/Resources/CaptainAtom_Skinning.json", type="string");
+cmds.setAttr(influenceGeoms_InitNode + '.filePath', toolboxPath+"/Tests/GeometryStack/Resources/CaptainAtom_Skinning.json", type="string");
 
 
 cmds.fabricSplice('addKLOperator', influenceGeoms_InitNode, '{"opName":"captainAtom_InfluenceGeoms_Init"}', """
@@ -30,7 +35,7 @@ operator captainAtom_InfluenceGeoms_Init(
   stack.loadJSONFile(filePath);
 }
 """)
-  
+
 
 ##############################################
 ## Set up the skinning pose node.
@@ -101,7 +106,7 @@ renderGeoms_InitNode = cmds.createNode("spliceMayaNode", name = "captainAtom_Ren
 cmds.fabricSplice('addInputPort', renderGeoms_InitNode, json.dumps({'portName':'filePath', 'dataType':'String', 'addMayaAttr': True}))
 cmds.fabricSplice('addOutputPort', renderGeoms_InitNode, json.dumps({'portName':'stack', 'dataType':'GeometryStack', 'extension':'RiggingToolbox', 'addSpliceMayaAttr':True, 'autoInitObjects': True}))
 
-cmds.setAttr(renderGeoms_InitNode + '.filePath', "D:/Projects/RiggingToolbox/Tests/GeometryStack/Resources/CaptainAtom_Wrapped.json", type="string");
+cmds.setAttr(renderGeoms_InitNode + '.filePath', toolboxPath+"/Tests/GeometryStack/Resources/CaptainAtom_Wrapped.json", type="string");
 
 
 cmds.fabricSplice('addKLOperator', renderGeoms_InitNode, '{"opName":"captainAtom_RenderGeoms_Init"}', """
@@ -118,7 +123,7 @@ operator captainAtom_RenderGeoms_Init(
   stack.loadJSONFile(filePath);
 }
 """)
-  
+
 ##############################################
 ## Set up the eval/render node.
 

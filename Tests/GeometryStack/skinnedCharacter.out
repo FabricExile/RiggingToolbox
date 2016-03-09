@@ -1,18 +1,16 @@
-Importing:D:\Projects\RiggingToolbox/Tests/GeometryStack/Resources/skinnedTube.abc
-AlembicGeometryAttributesReader: Property "EnvelopeWeights" not supported.
-AlembicGeometryAttributesReader: Property "MappingIndices" not supported.
-AlembicGeometryAttributesReader: Property "EnvelopeDeformerIndices" not supported.
-AlembicGeometryAttributesReader: Property "EnvelopeDeformers" not supported.
+Importing:D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources/skinnedTube.abc
 Warning: Pose count does not match the reference pose count. referencePose:4 != pose:2. Skinning disabled
-function Ref<GeometryStack>#notify!(Notifier, String, String):AlembicSkinnedMeshGeometryGenerator.changed
-function Ref<GeometryStack>#notify!(Notifier, String, String):AlembicSkinnedMeshGeometryGenerator.changed
-function GeometrySet Ref<GeometryStack>.evaluate!(EvalContext)
---function Ref<GeometryCache>#restore?(io GeometrySet)
---function Ref<AlembicSkinnedMeshGeometryGenerator>#evaluate!(EvalContext, io GeometrySet)
---function Ref<GeometryAttributeCache>#update!(GeometrySet, GeometryOperator):["positions"]
---function Ref<SkinningModifier>#evaluate!(EvalContext, io GeometrySet)
-function Ref<GeometryStack>#notify!(Notifier, String, String):SkinningModifier.changed
-function GeometrySet Ref<GeometryStack>.evaluate!(EvalContext)
---function Ref<GeometryAttributeCache>#restore?(io GeometrySet):["positions"]
---function Ref<SkinningModifier>#evaluate!(EvalContext, io GeometrySet)
+function GeometryStack.notify!(Notifier, String, String):AlembicSkinnedMeshGeometryGenerator.changed
+function GeometryStack.notify!(Notifier, String, String):AlembicSkinnedMeshGeometryGenerator.changed
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryCache.update!(io GeometrySet, GeometryOperator)
+--function AlembicSkinnedMeshGeometryGenerator.evaluate!(EvalContext, io GeometrySet)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Update:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
+function GeometryStack.notify!(Notifier, String, String):SkinningModifier.changed
+function GeometrySet GeometryStack.evaluate!(EvalContext)
+--function GeometryAttributeCache.update!(io GeometrySet, GeometryOperator):["positions"]
+----Restore:positions
+--function SkinningModifier.evaluate!(EvalContext, io GeometrySet)
 

@@ -1,16 +1,7 @@
-Error: Geometry missing required attributes:["normals"]
-  1 kl.internal.String.SetErrorDataPtrAndLength.AS0()
-  2 function.setError.in_AS0.ST()
-  3 method.evaluate.io_AS0.UO_GeometryStack.in_AS0.OO_EvalContext() GeometryStack.kl:122
-  4 operator.entry() GeometryStack_missingRequiredAttributes.kl:13
-  5 kl.internal.entry.stub.cpu()
-Error: Error in PushModifier_deformGeometries. Missing attributes.
-  1 kl.internal.String.SetErrorDataPtrAndLength.AS0()
-  2 function.setError.in_AS0.ST()
-  3 operator.PushModifier_deformGeometries.in.UI32.io_AS0.OO_GeometrySet.in.F32() PushModifier.kl:61
-  4 internal.PushModifier_deformGeometries.stub.cpu.00()
-Error: GeometryStack/PushModifier.kl:65:3: dereferenced null object
-  1 kl.internal.String.SetErrorDataPtrAndLength.AS0()
-  2 function.setError.in_AS0.ST()
-  3 operator.PushModifier_deformGeometries.in.UI32.io_AS0.OO_GeometrySet.in.F32() PushModifier.kl:65
-  4 internal.PushModifier_deformGeometries.stub.cpu.00()
+Error: Cannot evaluate 'PushModifier'. Geometry missing required attributes:["normals"]
+KL stack trace:
+[ST] 1 kl.internal.String.SetErrorDataPtrAndLength.AS0()
+[ST] 2 function.setError.R.ST()
+[ST] 3 method.evaluate.L.UO_GeometryStack.R.OO_EvalContext() GeometryStack.kl:145
+[ST] 4 operator.entry() missingRequiredAttributes.kl:12
+[ST] 5 kl.internal.entry.stub.cpu()

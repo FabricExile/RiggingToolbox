@@ -1,10 +1,7 @@
-Importing:D:\Projects\RiggingToolbox/Tests/GeometryStack/Resources/cubeTest.abc
-AlembicGeometryAttributesReader: Property "EnvelopeDeformerIndices" not supported.
-AlembicGeometryAttributesReader: Property "Envelope_Deformers" not supported.
-AlembicGeometryAttributesReader: Property "Envelope_Weights" not supported.
+Importing:D:/Projects/FabricEngineInc/RiggingToolbox/Tests/GeometryStack/Resources/cubeTest.abc
 NumGeometries:1
 Mesh: pointCount: 8 polygonCount: 6 nbAttributeVectors: 8
-  Points (adjacent polygons as 'polygon.neighborPolygonIndex', 
+  Points (adjacent polygons as 'polygon.neighborPolygonIndex',
           borders as '|', closed wing starts as '<<'):
     0: 3 polygons:  <<2.0, 0.0, 1.0
     1: 3 polygons:  <<3.0, 1.1, 0.3
