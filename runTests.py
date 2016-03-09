@@ -8,14 +8,6 @@ import difflib
 import imp
 import traceback
 
-# # Setup our working environment
-# repoDir = os.path.dirname(os.path.realpath(__file__))
-# extDir = os.path.join(repoDir, 'Ext')
-
-# if 'FABRIC_EXTS_PATH' not in os.environ or os.environ['FABRIC_EXTS_PATH'].find(extDir) == -1:
-#     en = os.path.join(repoDir, 'environment.py')
-#     imp.load_source('environment', en)
-
 import FabricEngine.Core
 
 failedTests = []
@@ -35,19 +27,22 @@ def emitMessage(arg0, arg1, msg):
         line = line.rstrip()
         print line
 
-client = FabricEngine.Core.createClient({ 'reportCallback': emitMessage, 'guarded': True })
 
-operator = client.DG.createOperator('unitTestOp')
-operator.setEntryPoint('entry')
-operator.setSourceCode('operator entry(){}');
-# operator.setMainThreadOnly(True)
+useDGNodeForFastUnitTesting = True
+if useDGNodeForFastUnitTesting:
+    # To avoid creating a new Fabric Engine context for each test,
+    # we can reuse the
+    client = FabricEngine.Core.createClient({ 'reportCallback': emitMessage, 'guarded': True })
+    operator = client.DG.createOperator('unitTestOp')
+    operator.setEntryPoint('entry')
+    operator.setSourceCode('operator entry(){}')
 
-binding = client.DG.createBinding()
-binding.setOperator(operator)
-binding.setParameterLayout([])
+    binding = client.DG.createBinding()
+    binding.setOperator(operator)
+    binding.setParameterLayout([])
 
-dgNode = client.DG.createNode('unitTestNode')
-dgNode.bindings.append(binding)
+    dgNode = client.DG.createNode('unitTestNode')
+    dgNode.bindings.append(binding)
 
 
 def checkTestOutput(filepath, output, update):
@@ -136,19 +131,8 @@ def runPytonTest(filepath, update):
 def runKLTest(filepath, update):
     print "Running KL test:" + filepath
 
-    if True:
-        cmdstring = "kl.exe " + filepath
-        # # Call the kl tool piping output to the output buffer.
-        proc = subprocess.Popen(cmdstring, stdout=subprocess.PIPE)
-
-        output = ""
-        while True:
-            line = proc.stdout.readline()
-            if line != '':
-                output += line.rstrip() + '\n'
-            else:
-                break
-    else:
+    if useDGNodeForFastUnitTesting:
+        # This code uses
 
         klCode = str(open( filepath ).read())
 
@@ -213,6 +197,19 @@ def runKLTest(filepath, update):
             output = sys.stdout.output
             output += str(e)
         sys.stdout = consoleout
+
+    else:
+        cmdstring = "kl.exe " + filepath
+        # # Call the kl tool piping output to the output buffer.
+        proc = subprocess.Popen(cmdstring, stdout=subprocess.PIPE)
+
+        output = ""
+        while True:
+            line = proc.stdout.readline()
+            if line != '':
+                output += line.rstrip() + '\n'
+            else:
+                break
 
     # Now remove all the output that comes from Fabric Engine loading...
     lines = output.split('\n')
